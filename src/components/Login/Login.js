@@ -48,7 +48,7 @@ const Login = (props) => {
     dispatchPassword({type:"userInput", val: event.target.value})
 
     setFormIsValid(
-      event.target.value.trim().length>6 && emailState.isValid
+      event.target.value.trim().length>6 && emailState.isValid 
     );
   };
 
