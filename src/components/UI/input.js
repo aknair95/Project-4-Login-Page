@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useImperativeHandle, useRef } from "react";
 import classes from "./input.module.css";
 
-const Input=(props) =>{
+const Input=React.forwardRef((props,ref) =>{
+    const inputRef=useRef();
+
+    const activate=() =>{
+        inputRef.current.focus();
+    }
+
+    useImperativeHandle(ref,() =>{                 //using this method so that activate function can be used in login component directly thru refs.
+        return {
+            activate: activate
+        }
+    })
     return(
         <div
             className={`${classes.control} ${
@@ -10,6 +21,7 @@ const Input=(props) =>{
         >
         <label htmlFor={props.id}>{props.label}</label>
         <input
+          ref={inputRef}
           type={props.type}
           id={props.id}
           value={props.value}
@@ -18,6 +30,6 @@ const Input=(props) =>{
         />
         </div>
     )
-}
+})
 
 export default Input;
